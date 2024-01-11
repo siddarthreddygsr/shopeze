@@ -15,10 +15,11 @@ function ProductDisplay() {
   const data = useContext(queryContext);
   useEffect(() => {
     // Fetch data from the API
+    
     axios.get(`https://dummyjson.com/products/search?q=${data.query}`).then((response) => {
       setProducts(response.data.products);
     });
-  }, []);
+  }, [data.query]);
 
   return (
     <div className="flex flex-wrap justify-center gap-4 mt-5">

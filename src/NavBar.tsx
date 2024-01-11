@@ -2,7 +2,7 @@ import { Navbar, Typography, IconButton, Button, Input } from "@material-tailwin
 import { BellIcon, Cog6ToothIcon } from "@heroicons/react/24/solid";
 import { createContext, useState } from 'react';
  
-export const queryContext = createContext("");
+export const queryContext = createContext({ query: "", setQuery: () => {} });
 export function Navigation() {
   const [query, setQuery] = useState("");
 
