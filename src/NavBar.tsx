@@ -3,8 +3,13 @@ import { BellIcon, Cog6ToothIcon } from "@heroicons/react/24/solid";
 import { createContext, useState } from 'react';
  
 export const queryContext = createContext({ query: "", setQuery: () => {} });
-export function Navigation() {
+
+function Navigation() {
   const [query, setQuery] = useState("");
+
+  const handleSearch = () => {
+    console.log("Performing search with query:", query);
+  };
 
   return (
     <Navbar className="mx-auto max-w-screen-xl p-2 lg:rounded-full lg:pl-6 px-5">
@@ -25,7 +30,7 @@ export function Navigation() {
             <BellIcon className="h-4 w-4" />
           </IconButton>
         </div>
-        <queryContext.Provider value={{query, setQuery}}>
+        <queryContext.Provider value={{ query, setQuery }}>
           <div className="relative flex w-full gap-2 md:w-max">
             <Input
               type="search"
@@ -33,7 +38,7 @@ export function Navigation() {
               label="Type here..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="pr-20 "
+              className="pr-20"
               containerProps={{
                 className: "min-w-[288px]",
               }}
@@ -41,7 +46,8 @@ export function Navigation() {
             <Button
               size="sm"
               color="black"
-              className="!absolute right-1 top-1 rounded "
+              className="!absolute right-1 top-1 rounded"
+              onClick={handleSearch} // Remove the curly braces
             >
               Search
             </Button>
@@ -51,6 +57,5 @@ export function Navigation() {
     </Navbar>
   );
 }
-
 
 export default Navigation;
