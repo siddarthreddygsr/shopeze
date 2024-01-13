@@ -11,15 +11,16 @@ interface Product {
 }
 
 function ProductDisplay() {
+  const { query } = useContext(queryContext);
   const [products, setProducts] = useState<Product[]>([]);
-  const data = useContext(queryContext);
+
   useEffect(() => {
     // Fetch data from the API
-    
-    axios.get(`https://dummyjson.com/products/search?q=${data.query}`).then((response) => {
-      setProducts(response.data.products);
+    axios.get(`https://dummyjson.com/products/search?q=${query}`).then((response) => {
+      // Check if the response and response.data.products are defined before setting state
+      setProducts(response.data?.products || []);
     });
-  }, [data.query]);
+  }, [query]);
 
   return (
     <div className="flex flex-wrap justify-center gap-4 mt-5">
